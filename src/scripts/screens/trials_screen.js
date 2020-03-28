@@ -14,7 +14,7 @@ export const renderTrialsScreen = () => {
     const red = 60+ (wpm * 3);
     const green = 275 - (wpm * 3);
     trial.style.backgroundColor = `rgba(${red}, ${green}, 0, 0.55)`;
-
+    trial.addEventListener("click", sendToPlayCB(wpm));
     trialsDiv.appendChild(trial);
 
     if (wpm === 65) {
@@ -24,17 +24,16 @@ export const renderTrialsScreen = () => {
       endless.style.backgroundColor = `rgba(255, 0, 0, 0.65)`;
       endless.style.width = "95%";
       endless.style.fontSize = "2.8vw";
-
+      endless.addEventListener("click", sendToPlayCB("endless"));
       trialsDiv.appendChild(endless);
     }
   }
 
-
-
-
-  console.log("reached trials");
-  const button = document.createElement("button");
-  button.textContent = "Go to Play"
-  button.addEventListener("click", renderPlayScreen);
-  screen.appendChild(button);
+  function sendToPlayCB (mode) {
+    return () => {
+      const buttons = document.getElementById("trials-div");
+      if (buttons) buttons.remove();
+      renderPlayScreen(mode);
+    };
+  }
 };
