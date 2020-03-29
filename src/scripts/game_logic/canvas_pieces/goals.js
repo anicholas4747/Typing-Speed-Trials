@@ -12,6 +12,14 @@ class Goal {
         keyHeld = true;
       }
     });
+
+    // recover 1 health point if streak of 10 achieved
+    if (!window.gameData.healthRecovering && window.gameData.streak % 10 === 0 && window.gameData.streak > 0) {
+      window.gameData.healthRecovering = true;
+      window.gameData.health = Math.min(20, window.gameData.health + 1);
+      setTimeout(() => window.gameData.healthRecovering = false, 500);
+    }
+
     this.draw(keyHeld);
   }
 

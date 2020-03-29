@@ -25,8 +25,7 @@ class Key {
     this.x = lane;
     this.y = window.gameData.canvasHeight * 0.3;
 
-    // 1000MS/SEC / ((WPM * 5 CHARS/WORD) / 60SEC)
-    this.speed = 1000 / ((window.gameData.wpm * 5) / 60);
+    this.speed = (window.gameData.wpm / 10);
 
     this.hit = false;
     this.missed = false;
@@ -34,10 +33,10 @@ class Key {
 
   update () {
     // fall from top
-    this.y += ((window.gameData.canvasHeight * 0.55) / this.speed);
+    this.y += this.speed;
 
     // if key correctly hit
-    const hitZone = Math.abs(this.y - window.gameData.canvasHeight * 0.85) < 5;
+    const hitZone = Math.abs(this.y - window.gameData.canvasHeight * 0.85) < 15;
     const pressingRightKey = (this.char === " ") ? window.gameData.pressedKeys.space : window.gameData.pressedKeys[this.char];
     if (!this.hit && hitZone && pressingRightKey) {
       this.hit = true;
@@ -46,7 +45,7 @@ class Key {
     }
 
     // if key missed
-    const missedZone = (this.y - window.gameData.canvasHeight * 0.9) > 5;
+    const missedZone = (this.y - window.gameData.canvasHeight * 0.85) > 10;
     if (!this.missed && !this.hit && missedZone) {
       this.missed = true;
       window.gameData.streak = 0;
@@ -60,6 +59,8 @@ class Key {
   draw () {
     window.ctx.lineWidth = 5;
     window.ctx.font = "30px Arial";
+    window.ctx.fillStyle = "#FFF";
+    window.ctx.strokeStyle = "#FFF";
 
     const goalWidth = (this.char === " ") ? (window.gameData.canvasWidth * 0.05) * 2 : (window.gameData.canvasWidth * 0.05);
     window.ctx.fillRect(this.x, this.y, goalWidth, window.gameData.canvasWidth * 0.05);
@@ -79,9 +80,11 @@ class Key {
       window.ctx.strokeStyle = "#F00";
     }
 
-    const printText = (this.char === " ") ? "SPACE" : this.char.toUpperCase();
     window.ctx.strokeRect(this.x, this.y, goalWidth, window.gameData.canvasWidth * 0.05);
-    window.ctx.fillText(printText, this.x + (goalWidth / 3), this.y + (goalWidth / 1.5));
+    const printText = (this.char === " ") ? "SPACE" : this.char.toUpperCase();
+    const textX = (this.char === " ") ? this.x + goalWidth / 7 : this.x + (goalWidth / 3);
+    const textY = (this.char === " ") ? this.y + goalWidth / 3 : this.y + (goalWidth / 1.5);
+    window.ctx.fillText(printText, textX, textY);
   }
 }
 

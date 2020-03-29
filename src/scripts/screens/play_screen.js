@@ -20,6 +20,7 @@ export const renderPlayScreen = (mode) => {
   window.ctx = canvas.getContext("2d");
   window.gameData = {
     health: 20,
+    healthRecovering: false,
     streak: 0,
     wpm: (mode === "endless") ? 20 : mode,
     typedString: "",
@@ -38,7 +39,8 @@ export const renderPlayScreen = (mode) => {
       "ol.": [canvas.width * 0.80, canvas.height * 0.85],
       "p": [canvas.width * 0.90, canvas.height * 0.85]
     },
-    quit: false
+    quit: false,
+    finishTime: (mode === "endless") ? "endless" : Date.now() + (60 * 1000) + (8 * 1000)
   };
 
   // add keypress events
@@ -48,7 +50,9 @@ export const renderPlayScreen = (mode) => {
   const canvasElements = [];
   canvasElements.push(...populateGoals());
 
-  const word = "hello world";
+  // const word = "helloworld";
+  const word = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  // 1000MS/SEC / ((WPM * 5 CHARS/WORD) / 60SEC)
   const printInterval = 1000 / ((window.gameData.wpm * 5) / 60);
   let waitTime = printInterval;
   for (let i in word) {
@@ -61,7 +65,7 @@ export const renderPlayScreen = (mode) => {
 
   // animation function
   function animate() {
-    if (window.gameData.health === 0 || window.gameData.quit) { // or if they finished the trial
+    if (window.gameData.health === 0 || window.gameData.quit || Date.now() >= window.gameData.finishTime) {
       cancelAnimationFrame(animate);
       if (!window.gameData.quit) {
         changeGameEventListeners("remove");
