@@ -1,6 +1,7 @@
 import { renderResultsScreen } from "./results_screen";
 import { changeGameEventListeners } from "../util/events";
 import { populateGoals } from "../game_logic/canvas_pieces/goals";
+import Key from "../game_logic/canvas_pieces/key";
 
 export const renderPlayScreen = (mode) => {
   const screen = document.getElementById("screen");
@@ -43,11 +44,17 @@ export const renderPlayScreen = (mode) => {
   // add keypress events
   changeGameEventListeners("add");
 
-  // add canvas elements to the screen
+  // add canvas elements and sample text to the screen
   const canvasElements = [];
   canvasElements.push(...populateGoals());
 
-  
+  const word = "hello world";
+  const printInterval = 1000 / ((window.gameData.wpm * 5) / 60);
+  let waitTime = printInterval;
+  for (let i in word) {
+    setTimeout(() => canvasElements.push(new Key(word[i])), waitTime);
+    waitTime += printInterval;
+  }
 
   // bring canvas to life
   animate();
