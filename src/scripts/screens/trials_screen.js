@@ -7,7 +7,7 @@ export const renderTrialsScreen = () => {
   trialsDiv.id = "trials-div";
   screen.appendChild(trialsDiv);
 
-  for (let wpm = 25; wpm <= 65; wpm = wpm + 5) {
+  for (let wpm = 20; wpm <= 60; wpm = wpm + 5) {
     const trial = document.createElement("h2");
     trial.textContent = `${wpm} WPM`;
     trial.classList.add("trials");
@@ -17,7 +17,7 @@ export const renderTrialsScreen = () => {
     trial.addEventListener("click", sendToPlayCB(wpm));
     trialsDiv.appendChild(trial);
 
-    if (wpm === 65) {
+    if (wpm === 60) {
       const endless = document.createElement("h2");
       endless.textContent = `Endless Mode`;
       endless.classList.add("trials");

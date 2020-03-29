@@ -1,15 +1,41 @@
 import { renderResultsScreen } from "./results_screen";
+import { changeGameEventListeners } from "../util/events";
 
 export const renderPlayScreen = (mode) => {
   const screen = document.getElementById("screen");
+  const canvas = document.createElement("canvas");
+  canvas.id = "canvas";
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  screen.appendChild(canvas);
 
+  const quitButton = document.createElement("h3");
+  quitButton.id = "quit-button";
+  quitButton.textContent = "QUIT";
+  screen.appendChild(quitButton);
 
+  // constants that game pieces listen for
+  const ctx = canvas.getContext("2d");
+  const gameData = {
+    health: 20,
+    streak: 0,
+    wpm: (mode === "endless") ? 20 : mode,
+    typedString: "",
+    soundFX: window.soundChoice,
+    pressedKeys: { "a": false, "b": false, "c": false, "d": false, "e": false, "f": false, "g": false, "h": false, "i": false, "j": false, "k": false, "l": false, "m": false, "n": false, "o": false, "p": false, "q": false, "r": false, "s": false, "t": false, "u": false, "v": false, "w": false, "x": false, "y": false, "z": false, ",": false, ".": false, "space": false },
+    goalPos: {
+      "qaz": [canvas.width / 2, canvas.height / 2],
+      "wsx": [canvas.width / 2, canvas.height / 2],
+      "edc": [canvas.width / 2, canvas.height / 2],
+      "rfvbgt": [canvas.width / 2, canvas.height / 2],
+      "space": [canvas.width / 2, canvas.height / 2],
+      "yhnmju": [canvas.width / 2, canvas.height / 2],
+      "ik,": [canvas.width / 2, canvas.height / 2],
+      "ol.": [canvas.width / 2, canvas.height / 2],
+      "p": [canvas.width / 2, canvas.height / 2]
+    }
+  };
 
-
-
-  console.log("reached play", mode);
-  const button = document.createElement("button");
-  button.textContent = "Go to Results"
-  button.addEventListener("click", renderResultsScreen);
-  screen.appendChild(button);
+  // add keypress events
+  changeGameEventListeners("add", gameData);
 };
