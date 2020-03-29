@@ -57,32 +57,27 @@ class Key {
 
   draw () {
     window.ctx.lineWidth = 5;
-    window.ctx.fillStyle = "#DDD";
-    window.ctx.strokeStyle = "#000";
-    window.ctx.font = "20px Arial";
+    window.ctx.font = "30px Arial";
 
     if (!this.hit && !this.missed) {
       // draw key falling
+      window.ctx.fillStyle = "#FFF";
+      window.ctx.strokeStyle = "#000";
     } else if (this.hit) {
       // don't draw the key anymore
+      window.ctx.fillStyle = "#0F0";
+      window.ctx.strokeStyle = "#0F0";
     } else if (this.missed) {
       // draw red border around key
+      window.ctx.fillStyle = "#F00";
+      window.ctx.strokeStyle = "#F00";
     }
 
-    const goalWidth = (keyStr === "space") ? (canvasWidth * 0.05) * 2 : (canvasWidth * 0.05);
-    window.ctx.beginPath();
-    window.ctx.moveTo(this.x, this.y);
-    window.ctx.lineTo(this.x + goalWidth, this.y);
-    window.ctx.lineTo(this.x + goalWidth, this.y + (canvasWidth * 0.05));
-    window.ctx.lineTo(this.x, this.y + (canvasWidth * 0.05));
-    window.ctx.lineTo(this.x, this.y);
-    window.ctx.stroke();
-
-    if (fillColor && held) {
-      window.ctx.fillStyle = fillColor;
-      window.ctx.fillRect(this.x * 1.005, this.y * 1.005, goalWidth * 0.9, (canvasWidth * 0.05) * 0.9);
-      window.ctx.fill();
-    }
+    const goalWidth = (this.char === "space") ? (window.gameData.canvasWidth * 0.05) * 2 : (window.gameData.canvasWidth * 0.05);
+    window.ctx.fillRect(this.x, this.y, goalWidth, window.gameData.canvasWidth * 0.05);
+    window.ctx.fill();
+    window.ctx.strokeRect(this.x, this.y, goalWidth, window.gameData.canvasWidth * 0.05);
+    window.ctx.fillText(this.char.toUpperCase(), this.x * 1.25, this.y * 1.25);
   }
 }
 
