@@ -23,6 +23,8 @@ export const renderPlayScreen = (mode) => {
     wpm: (mode === "endless") ? 20 : mode,
     typedString: "",
     soundFX: window.soundChoice,
+    canvasWidth: canvas.width,
+    canvasHeight: canvas.height,
     pressedKeys: { "a": false, "b": false, "c": false, "d": false, "e": false, "f": false, "g": false, "h": false, "i": false, "j": false, "k": false, "l": false, "m": false, "n": false, "o": false, "p": false, "q": false, "r": false, "s": false, "t": false, "u": false, "v": false, "w": false, "x": false, "y": false, "z": false, ",": false, ".": false, "space": false },
     goalPos: {
       "qaz": [canvas.width / 2, canvas.height / 2],
@@ -43,4 +45,22 @@ export const renderPlayScreen = (mode) => {
   // draw canvas elements to the screen
   const canvasElements = [];
   canvasElements.push(...populateGoals());
+
+  animate();
+
+  // animation function
+  function animate() {
+    if (window.gameData.health === 0) { // or if they finished the trial
+      cancelAnimationFrame(animate);
+      changeGameEventListeners("remove");
+      renderResultsScreen();
+    } else {
+      requestAnimationFrame(animate);
+    }
+    window.ctx.clearRect(0, 0, innerWidth, innerHeight);
+  
+    canvasElements.forEach(el => {
+      el.update();
+    });
+  }
 };

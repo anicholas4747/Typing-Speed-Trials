@@ -23,7 +23,6 @@ function keyDownCB (e) {
       return;
     case 65:
       window.gameData.pressedKeys.a = true;
-      console.log(window.gameData.pressedKeys.a)
       return;
     case 66:
       window.gameData.pressedKeys.b = true;

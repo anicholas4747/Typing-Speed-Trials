@@ -16,49 +16,62 @@ class Goal {
   }
 
   draw(held) {
-    // WPM
+    let { health, streak, wpm, canvasWidth, canvasHeight } = window.gameData;
+    let keyStr = this.keys.join("");
 
+    window.ctx.fillStyle = "#111";
+    window.ctx.font = "60px Arial";
+
+    // WPM
+    window.ctx.fillText(`${wpm} WPM`, (canvasWidth / 2) - 50, 50);
+    
     // Health
+    window.ctx.fillRect(canvasWidth - 255, 50, 200, 50);
+    window.ctx.fill();
+    window.ctx.fillStyle = "#CCC";
+    window.ctx.fillRect(canvasWidth - 255, 50, health * 10, 50);
+    window.ctx.fill();
+    window.ctx.fillStyle = "#111";
+    window.ctx.fillText(`${health}`, canvasWidth - 50, 50);
     
     // Streak
+    window.ctx.fillText(`Streak: ${streak}`, (canvasWidth / 2) - 30, 150);
+    
+    // Goal
+    let fillColor;
+    if (keyStr === "qaz") {
+      fillColor = "#f00";
+    } else if (keyStr === "wsx") {
+      fillColor = "";
+    } else if (keyStr === "edc") {
+      fillColor = "";
+    } else if (keyStr === "rfvbgt") {
+      fillColor = "";
+    } else if (keyStr === "space") {
+      fillColor = "";
+    } else if (keyStr === "yhnmju") {
+      fillColor = "";
+    } else if (keyStr === "ik,") {
+      fillColor = "";
+    } else if (keyStr === "ol.") {
+      fillColor = "";
+    } else if (keyStr === "p") {
+      fillColor = "";
+    }
 
-    // Goals
-
-    window.ctx.fillStyle = "#85BDB6";
-    window.ctx.font = "30px Arial";
-    if (totalScore) window.ctx.fillText(`Rank: `, 75, 200);
-    window.ctx.fillStyle = fill;
-    window.ctx.font = font;
-    if (totalScore) window.ctx.fillText(`${rank}`, 175, 200);
-
-    // Score
-    window.ctx.fillStyle = "#FFC513";
-    window.ctx.font = "30px Arial";
-    if (totalScore) window.ctx.fillText(`Score: ${totalScore.score * 100}`, (innerWidth / 2) - 75, 200);
-
-    // Misses
-    window.ctx.fillStyle = "#DB0700";
-    window.ctx.font = "30px Arial";
-    if (totalScore) window.ctx.fillText(`Misses: ${totalNotes.misses}`, innerWidth - 250, 200);
-
-    // actual circles
-    window.ctx.beginPath();
-    window.ctx.arc(this.x, this.y, 50, 0, Math.PI * 2);
+    const goalWidth = (keyStr === "space") ? 102 : 51;
     window.ctx.lineWidth = 15;
-    window.ctx.strokeStyle = "#85BDB6";
-    window.ctx.stroke();
-
-    window.ctx.fillStyle = "#85BDB6";
-    window.ctx.font = "30px Arial";
-    window.ctx.fillText(this.key.toUpperCase(), this.x, this.y * 0.8);
-
-    let gradient = window.ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, 50);
-    gradient.addColorStop(0, "#FFC513");
-    gradient.addColorStop(1, "#EFFBFF");
-    const fillStyleClicked = held ? gradient : "#EEE";
-
-    window.ctx.fillStyle = fillStyleClicked;
+    window.ctx.beginPath();
+    window.ctx.fillRect(this.x, this.y, goalWidth, 51);
+    window.ctx.fillStyle = held ? fillColor : "rgba(0,0,0,0.25)";
     window.ctx.fill();
+    
+    // Track
+    window.ctx.beginPath();
+    window.ctx.moveTo(goalWidth / 2, 200);
+    window.ctx.lineTo(goalWidth / 2, this.y);
+    window.ctx.strokeStyle = "#111";
+    window.ctx.stroke();
   }
 }
 
