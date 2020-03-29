@@ -19,58 +19,68 @@ class Goal {
     let { health, streak, wpm, canvasWidth, canvasHeight } = window.gameData;
     let keyStr = this.keys.join("");
 
+    window.ctx.lineWidth = 5;
     window.ctx.fillStyle = "#111";
+    window.ctx.strokeStyle = "#111";
     window.ctx.font = "60px Arial";
-
+    
     // WPM
-    window.ctx.fillText(`${wpm} WPM`, (canvasWidth / 2) - 50, 50);
+    window.ctx.fillText(`${wpm} WPM`, (canvasWidth / 2.5), canvasHeight * 0.125);
     
     // Health
-    window.ctx.fillRect(canvasWidth - 255, 50, 200, 50);
+    window.ctx.fillRect(canvasWidth * 0.77, canvasHeight * 0.065, 200, 50);
     window.ctx.fill();
     window.ctx.fillStyle = "#CCC";
-    window.ctx.fillRect(canvasWidth - 255, 50, health * 10, 50);
+    window.ctx.fillRect(canvasWidth * 0.77, canvasHeight * 0.065, health * 10, 50);
     window.ctx.fill();
     window.ctx.fillStyle = "#111";
-    window.ctx.fillText(`${health}`, canvasWidth - 50, 50);
+    window.ctx.fillText(`${health}`, canvasWidth * 0.925, canvasHeight * 0.125);
     
     // Streak
-    window.ctx.fillText(`Streak: ${streak}`, (canvasWidth / 2) - 30, 150);
+    window.ctx.font = "40px Arial";
+    window.ctx.fillText(`Streak: ${streak}`, (canvasWidth / 2.225) - 30, 150);
     
     // Goal
     let fillColor;
     if (keyStr === "qaz") {
-      fillColor = "#f00";
+      fillColor = "rgba(28, 68, 183,0.95)";
     } else if (keyStr === "wsx") {
-      fillColor = "";
+      fillColor = "rgba(242, 145, 0,0.95)";
     } else if (keyStr === "edc") {
-      fillColor = "";
+      fillColor = "rgba(0, 141, 48,0.95)";
     } else if (keyStr === "rfvbgt") {
-      fillColor = "";
+      fillColor = "rgba(244, 96, 0,0.95)";
     } else if (keyStr === "space") {
-      fillColor = "";
+      fillColor = "rgba(131, 0, 217,0.95)";
     } else if (keyStr === "yhnmju") {
-      fillColor = "";
+      fillColor = "rgba(189, 47, 46,0.95)";
     } else if (keyStr === "ik,") {
-      fillColor = "";
+      fillColor = "rgba(197, 71, 194,0.95)";
     } else if (keyStr === "ol.") {
-      fillColor = "";
+      fillColor = "rgba(51, 193, 243,0.95)";
     } else if (keyStr === "p") {
-      fillColor = "";
+      fillColor = "rgba(5, 190, 142,0.95)";
     }
 
-    const goalWidth = (keyStr === "space") ? 102 : 51;
-    window.ctx.lineWidth = 15;
+    const goalWidth = (keyStr === "space") ? (canvasWidth * 0.05) * 2 : (canvasWidth * 0.05);
     window.ctx.beginPath();
-    window.ctx.fillRect(this.x, this.y, goalWidth, 51);
-    window.ctx.fillStyle = held ? fillColor : "rgba(0,0,0,0.25)";
-    window.ctx.fill();
+    window.ctx.moveTo(this.x, this.y);
+    window.ctx.lineTo(this.x + goalWidth, this.y);
+    window.ctx.lineTo(this.x + goalWidth, this.y + (canvasWidth * 0.05));
+    window.ctx.lineTo(this.x, this.y + (canvasWidth * 0.05));
+    window.ctx.lineTo(this.x, this.y);
+    window.ctx.stroke();
+
+    if (fillColor && held) {
+      window.ctx.fillStyle = fillColor;
+      window.ctx.fillRect(this.x * 1.005, this.y * 1.005, goalWidth * 0.9, (canvasWidth * 0.05) * 0.9);
+      window.ctx.fill();
+    }
     
     // Track
     window.ctx.beginPath();
-    window.ctx.moveTo(goalWidth / 2, 200);
-    window.ctx.lineTo(goalWidth / 2, this.y);
-    window.ctx.strokeStyle = "#111";
+    window.ctx.moveTo(this.x + (goalWidth / 2), canvasHeight * 0.3);
+    window.ctx.lineTo(this.x + (goalWidth / 2), this.y);
     window.ctx.stroke();
   }
 }

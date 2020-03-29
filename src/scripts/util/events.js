@@ -5,6 +5,7 @@ export const changeGameEventListeners = (addOrRemove) => {
     addEventListener("keydown", keyDownCB);
     addEventListener("keyup", keyUpCB);
     document.getElementById("quit-button").addEventListener("click", () => {
+      window.gameData.quit = true;
       changeGameEventListeners("remove");
       renderTrialsScreen();
     });
