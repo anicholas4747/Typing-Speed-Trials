@@ -43,10 +43,13 @@ export const renderPlayScreen = (mode) => {
   // add keypress events
   changeGameEventListeners("add");
 
-  // draw canvas elements to the screen
+  // add canvas elements to the screen
   const canvasElements = [];
   canvasElements.push(...populateGoals());
 
+  
+
+  // bring canvas to life
   animate();
 
   // animation function

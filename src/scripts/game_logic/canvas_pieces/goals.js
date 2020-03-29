@@ -20,20 +20,22 @@ class Goal {
     let keyStr = this.keys.join("");
 
     window.ctx.lineWidth = 5;
-    window.ctx.fillStyle = "#111";
-    window.ctx.strokeStyle = "#111";
+    window.ctx.fillStyle = "#FFF";
+    window.ctx.strokeStyle = "#FFF";
     window.ctx.font = "60px Arial";
     
     // WPM
     window.ctx.fillText(`${wpm} WPM`, (canvasWidth / 2.5), canvasHeight * 0.125);
     
     // Health
+    window.ctx.fillStyle = "#111";
     window.ctx.fillRect(canvasWidth * 0.77, canvasHeight * 0.065, 200, 50);
     window.ctx.fill();
-    window.ctx.fillStyle = "#CCC";
+    window.ctx.fillStyle = "#0F0";
     window.ctx.fillRect(canvasWidth * 0.77, canvasHeight * 0.065, health * 10, 50);
     window.ctx.fill();
-    window.ctx.fillStyle = "#111";
+    window.ctx.strokeRect(canvasWidth * 0.77, canvasHeight * 0.065, 200, 50);
+    window.ctx.fillStyle = "#FFF";
     window.ctx.fillText(`${health}`, canvasWidth * 0.925, canvasHeight * 0.125);
     
     // Streak
