@@ -1,11 +1,11 @@
 import { renderTrialsScreen } from "../screens/trials_screen";
 
-export const changeGameEventListeners = (addOrRemove, gameData) => {
+export const changeGameEventListeners = (addOrRemove) => {
   if (addOrRemove === "add") {
-    addEventListener("keydown", keyDownCB.bind(this, gameData));
-    addEventListener("keyup", keyUpCB.bind(this, gameData));
+    addEventListener("keydown", keyDownCB);
+    addEventListener("keyup", keyUpCB);
     document.getElementById("quit-button").addEventListener("click", () => {
-      changeGameEventListeners("remove", gameData);
+      changeGameEventListeners("remove");
       renderTrialsScreen();
     });
   } else if (addOrRemove === "remove") {
@@ -16,187 +16,187 @@ export const changeGameEventListeners = (addOrRemove, gameData) => {
   }
 };
 
-function keyDownCB (gameData, e) {
+function keyDownCB (e) {
   switch (e.keyCode) {
     case 32:
-      gameData.pressedKeys.space = true;
+      window.gameData.pressedKeys.space = true;
       return;
     case 65:
-      gameData.pressedKeys.a = true;
-      console.log(gameData.pressedKeys.a)
+      window.gameData.pressedKeys.a = true;
+      console.log(window.gameData.pressedKeys.a)
       return;
     case 66:
-      gameData.pressedKeys.b = true;
+      window.gameData.pressedKeys.b = true;
       return;
     case 67:
-      gameData.pressedKeys.c = true;
+      window.gameData.pressedKeys.c = true;
       return;
     case 68:
-      gameData.pressedKeys.d = true;
+      window.gameData.pressedKeys.d = true;
       return;
     case 69:
-      gameData.pressedKeys.e = true;
+      window.gameData.pressedKeys.e = true;
       return;
     case 70:
-      gameData.pressedKeys.f = true;
+      window.gameData.pressedKeys.f = true;
       return;
     case 71:
-      gameData.pressedKeys.g = true;
+      window.gameData.pressedKeys.g = true;
       return;
     case 72:
-      gameData.pressedKeys.h = true;
+      window.gameData.pressedKeys.h = true;
       return;
     case 73:
-      gameData.pressedKeys.i = true;
+      window.gameData.pressedKeys.i = true;
       return;
     case 74:
-      gameData.pressedKeys.j = true;
+      window.gameData.pressedKeys.j = true;
       return;
     case 75:
-      gameData.pressedKeys.k = true;
+      window.gameData.pressedKeys.k = true;
       return;
     case 76:
-      gameData.pressedKeys.l = true;
+      window.gameData.pressedKeys.l = true;
       return;
     case 77:
-      gameData.pressedKeys.m = true;
+      window.gameData.pressedKeys.m = true;
       return;
     case 78:
-      gameData.pressedKeys.n = true;
+      window.gameData.pressedKeys.n = true;
       return;
     case 79:
-      gameData.pressedKeys.o = true;
+      window.gameData.pressedKeys.o = true;
       return;
     case 80:
-      gameData.pressedKeys.p = true;
+      window.gameData.pressedKeys.p = true;
       return;
     case 81:
-      gameData.pressedKeys.q = true;
+      window.gameData.pressedKeys.q = true;
       return;
     case 82:
-      gameData.pressedKeys.r = true;
+      window.gameData.pressedKeys.r = true;
       return;
     case 83:
-      gameData.pressedKeys.s = true;
+      window.gameData.pressedKeys.s = true;
       return;
     case 84:
-      gameData.pressedKeys.t = true;
+      window.gameData.pressedKeys.t = true;
       return;
     case 85:
-      gameData.pressedKeys.u = true;
+      window.gameData.pressedKeys.u = true;
       return;
     case 86:
-      gameData.pressedKeys.v = true;
+      window.gameData.pressedKeys.v = true;
       return;
     case 87:
-      gameData.pressedKeys.w = true;
+      window.gameData.pressedKeys.w = true;
       return;
     case 88:
-      gameData.pressedKeys.x = true;
+      window.gameData.pressedKeys.x = true;
       return;
     case 89:
-      gameData.pressedKeys.y = true;
+      window.gameData.pressedKeys.y = true;
       return;
     case 90:
-      gameData.pressedKeys.z = true;
+      window.gameData.pressedKeys.z = true;
       return;
     case 188:
-      gameData.pressedKeys[","] = true;
+      window.gameData.pressedKeys[","] = true;
       return;
     case 190:
-      gameData.pressedKeys["."] = true;
+      window.gameData.pressedKeys["."] = true;
       return;
   }
 }
 
-function keyUpCB (e, gameData) {
+function keyUpCB (e) {
   switch (e.keyCode) {
     case 32:
-      gameData.pressedKeys.space = false;
+      window.gameData.pressedKeys.space = false;
       return;
     case 65:
-      gameData.pressedKeys.a = false;
+      window.gameData.pressedKeys.a = false;
       return;
     case 66:
-      gameData.pressedKeys.b = false;
+      window.gameData.pressedKeys.b = false;
       return;
     case 67:
-      gameData.pressedKeys.c = false;
+      window.gameData.pressedKeys.c = false;
       return;
     case 68:
-      gameData.pressedKeys.d = false;
+      window.gameData.pressedKeys.d = false;
       return;
     case 69:
-      gameData.pressedKeys.e = false;
+      window.gameData.pressedKeys.e = false;
       return;
     case 70:
-      gameData.pressedKeys.f = false;
+      window.gameData.pressedKeys.f = false;
       return;
     case 71:
-      gameData.pressedKeys.g = false;
+      window.gameData.pressedKeys.g = false;
       return;
     case 72:
-      gameData.pressedKeys.h = false;
+      window.gameData.pressedKeys.h = false;
       return;
     case 73:
-      gameData.pressedKeys.i = false;
+      window.gameData.pressedKeys.i = false;
       return;
     case 74:
-      gameData.pressedKeys.j = false;
+      window.gameData.pressedKeys.j = false;
       return;
     case 75:
-      gameData.pressedKeys.k = false;
+      window.gameData.pressedKeys.k = false;
       return;
     case 76:
-      gameData.pressedKeys.l = false;
+      window.gameData.pressedKeys.l = false;
       return;
     case 77:
-      gameData.pressedKeys.m = false;
+      window.gameData.pressedKeys.m = false;
       return;
     case 78:
-      gameData.pressedKeys.n = false;
+      window.gameData.pressedKeys.n = false;
       return;
     case 79:
-      gameData.pressedKeys.o = false;
+      window.gameData.pressedKeys.o = false;
       return;
     case 80:
-      gameData.pressedKeys.p = false;
+      window.gameData.pressedKeys.p = false;
       return;
     case 81:
-      gameData.pressedKeys.q = false;
+      window.gameData.pressedKeys.q = false;
       return;
     case 82:
-      gameData.pressedKeys.r = false;
+      window.gameData.pressedKeys.r = false;
       return;
     case 83:
-      gameData.pressedKeys.s = false;
+      window.gameData.pressedKeys.s = false;
       return;
     case 84:
-      gameData.pressedKeys.t = false;
+      window.gameData.pressedKeys.t = false;
       return;
     case 85:
-      gameData.pressedKeys.u = false;
+      window.gameData.pressedKeys.u = false;
       return;
     case 86:
-      gameData.pressedKeys.v = false;
+      window.gameData.pressedKeys.v = false;
       return;
     case 87:
-      gameData.pressedKeys.w = false;
+      window.gameData.pressedKeys.w = false;
       return;
     case 88:
-      gameData.pressedKeys.x = false;
+      window.gameData.pressedKeys.x = false;
       return;
     case 89:
-      gameData.pressedKeys.y = false;
+      window.gameData.pressedKeys.y = false;
       return;
     case 90:
-      gameData.pressedKeys.z = false;
+      window.gameData.pressedKeys.z = false;
       return;
     case 188:
-      gameData.pressedKeys[","] = false;
+      window.gameData.pressedKeys[","] = false;
       return;
     case 190:
-      gameData.pressedKeys["."] = false;
+      window.gameData.pressedKeys["."] = false;
       return;
   }
 }

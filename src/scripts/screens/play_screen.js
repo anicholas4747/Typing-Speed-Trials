@@ -1,5 +1,6 @@
 import { renderResultsScreen } from "./results_screen";
 import { changeGameEventListeners } from "../util/events";
+import { populateGoals } from "../game_logic/canvas_pieces/goals";
 
 export const renderPlayScreen = (mode) => {
   const screen = document.getElementById("screen");
@@ -15,8 +16,8 @@ export const renderPlayScreen = (mode) => {
   screen.appendChild(quitButton);
 
   // constants that game pieces listen for
-  const ctx = canvas.getContext("2d");
-  const gameData = {
+  window.ctx = canvas.getContext("2d");
+  window.gameData = {
     health: 20,
     streak: 0,
     wpm: (mode === "endless") ? 20 : mode,
@@ -37,5 +38,9 @@ export const renderPlayScreen = (mode) => {
   };
 
   // add keypress events
-  changeGameEventListeners("add", gameData);
+  changeGameEventListeners("add");
+
+  // draw canvas elements to the screen
+  const canvasElements = [];
+  canvasElements.push(...populateGoals());
 };
