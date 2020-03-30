@@ -42,7 +42,6 @@ class Key {
       this.hit = true;
       window.gameData.streak += 1;
       window.gameData.typedString += this.char;
-      console.log("hit", this.char)
     }
 
     // if key missed
@@ -52,7 +51,6 @@ class Key {
       window.gameData.streak = 0;
       window.gameData.health -= 1;
       window.gameData.typedString += "*";
-      console.log("missed", this.char)
     }
 
     // character made it to goal zone

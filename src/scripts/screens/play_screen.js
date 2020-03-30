@@ -122,7 +122,6 @@ export const renderPlayScreen = (mode) => {
 
   // animation function
   function animate() {
-    console.log(window.gameData.typedString)
     if (window.gameData.health === 0 || window.gameData.quit || Date.now() >= window.gameData.finishTime) {
       clearInterval(increaseWPMInterval);
       increaseWPMInterval = 0;
