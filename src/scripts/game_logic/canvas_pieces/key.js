@@ -71,7 +71,7 @@ class Key {
       window.ctx.fillStyle = "#000";
       window.ctx.strokeStyle = "#000";
     } else if (this.hit) {
-      // don't draw the key anymore
+      // draw green border around key
       window.ctx.fillStyle = "#000";
       window.ctx.strokeStyle = "#0F0";
     } else if (this.missed) {

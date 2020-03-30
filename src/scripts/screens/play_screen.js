@@ -1,14 +1,18 @@
 import { renderResultsScreen } from "./results_screen";
 import { changeGameEventListeners } from "../util/events";
 import { populateGoals } from "../game_logic/canvas_pieces/goals";
-import Key from "../game_logic/canvas_pieces/key";
 import { endlessText } from "../game_logic/text_samples/endless";
-import { wpm40Text } from "../game_logic/text_samples/40wpm";
-import { wpm30Text } from "../game_logic/text_samples/30wpm";
-import { wpm50Text } from "../game_logic/text_samples/50wpm";
+import { wpm20Text } from "../game_logic/text_samples/20wpm";
 import { wpm25Text } from "../game_logic/text_samples/25wpm";
-import { wpm45Text } from "../game_logic/text_samples/45wpm";
+import { wpm30Text } from "../game_logic/text_samples/30wpm";
 import { wpm35Text } from "../game_logic/text_samples/35wpm";
+import { wpm40Text } from "../game_logic/text_samples/40wpm";
+import { wpm45Text } from "../game_logic/text_samples/45wpm";
+import { wpm50Text } from "../game_logic/text_samples/50wpm";
+import { wpm55Text } from "../game_logic/text_samples/55wpm";
+import { wpm60Text } from "../game_logic/text_samples/60wpm";
+import Key from "../game_logic/canvas_pieces/key";
+import ScrollKey from "../game_logic/canvas_pieces/scroll_key";
 
 export const renderPlayScreen = (mode) => {
   const screen = document.getElementById("screen");
@@ -62,7 +66,7 @@ export const renderPlayScreen = (mode) => {
   if (mode === "endless") {
     setInterval(() => {
       window.gameData.wpm += 2;
-    }, 500);
+    }, (10 * 1000));
   }
 
   // bring canvas to life
@@ -71,25 +75,25 @@ export const renderPlayScreen = (mode) => {
   // set up sample text to be read
   let words;
   if (mode === "endless") {
-    words = endlessText[Math.floor(Math.random() * array.length)];
+    words = endlessText[Math.floor(Math.random() * endlessText.length)];
   } else if (mode === 20) {
-    words = [Math.floor(Math.random() * array.length)];
+    words = wpm20Text[Math.floor(Math.random() * wpm20Text.length)];
   } else if (mode === 25) {
-    words = wpm25Text[Math.floor(Math.random() * array.length)];
+    words = wpm25Text[Math.floor(Math.random() * wpm25Text.length)];
   } else if (mode === 30) {
-    words = wpm30Text[Math.floor(Math.random() * array.length)];
+    words = wpm30Text[Math.floor(Math.random() * wpm30Text.length)];
   } else if (mode === 35) {
-    words = wpm35Text[Math.floor(Math.random() * array.length)];
+    words = wpm35Text[Math.floor(Math.random() * wpm35Text.length)];
   } else if (mode === 40) {
-    words = wpm40Text[Math.floor(Math.random() * array.length)];
+    words = wpm40Text[Math.floor(Math.random() * wpm40Text.length)];
   } else if (mode === 45) {
-    words = wpm45Text[Math.floor(Math.random() * array.length)];
+    words = wpm45Text[Math.floor(Math.random() * wpm45Text.length)];
   } else if (mode === 50) {
-    words = wpm50Text[Math.floor(Math.random() * array.length)];
+    words = wpm50Text[Math.floor(Math.random() * wpm50Text.length)];
   } else if (mode === 55) {
-    words = [Math.floor(Math.random() * array.length)];
+    words = wpm55Text[Math.floor(Math.random() * wpm55Text.length)];
   } else if (mode === 60) {
-    words = [Math.floor(Math.random() * array.length)];
+    words = wpm60Text[Math.floor(Math.random() * wpm60Text.length)];
   }
 
   let wordsArr = words.split("");
@@ -103,9 +107,9 @@ export const renderPlayScreen = (mode) => {
   while (wordsArr.length) {
     let currentChar = wordsArr.shift();
     setTimeout(() => canvasElements.push(new Key(currentChar)), waitTime);
+    setTimeout(() => canvasElements.push(new ScrollKey(currentChar)), waitTime);
     waitTime += printInterval;
   }
-  console.log("exited while loop");
 
   // animation function
   function animate() {
