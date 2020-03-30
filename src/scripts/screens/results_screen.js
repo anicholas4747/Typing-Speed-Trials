@@ -3,6 +3,7 @@ import { renderTrialsScreen } from "./trials_screen";
 export const renderResultsScreen = () => {
   const screen = document.getElementById("screen");
   
+  // add result screen html elements
   const resultsDiv = document.createElement("div");
   resultsDiv.id = "results-div";
 
@@ -39,24 +40,13 @@ export const renderResultsScreen = () => {
   speedText.style.margin = "1vh auto";
   speedText.style.width = "fit-content";
   resultsDiv.appendChild(speedText);
-  
-  const streakText = document.createElement("h3");
-  streakText.textContent = `Longest Streak: ${window.gameData.longestStreak}`;
-  streakText.style.color = "#333";
-  streakText.style.margin = "1vh auto";
-  streakText.style.width = "fit-content";
-  resultsDiv.appendChild(streakText);
-  
-  const trialText = document.createElement("h3");
-  trialText.textContent = "Text:";
-  trialText.style.color = "#333";
-  trialText.style.margin = "1vh auto";
-  trialText.style.width = "fit-content";
-  resultsDiv.appendChild(trialText);
 
   const resultsStr = document.createElement("div");
   resultsStr.id = "results-str";
-  
+
+  // calc longest streak and display hit, missed, and unreached characters
+  let longestStreak = 0;
+  let currentStreak = 0;
   const printInterval = 10;
   let waitTime = printInterval;
   for (let i = 0; i < window.gameData.attemptedString.length; i++) {
@@ -73,8 +63,11 @@ export const renderResultsScreen = () => {
 
     if (userInput && char === userInput.toUpperCase()) {
       letter.style.color = "forestgreen";
+      currentStreak += 1;
+      longestStreak = Math.max(longestStreak, currentStreak);
     } else if (userInput) {
       letter.style.color = "indianred";
+      currentStreak = 0;
     } else {
       letter.style.color = "rgba(245,245,245,0.75)";
     }
@@ -88,6 +81,20 @@ export const renderResultsScreen = () => {
     setTimeout(() => resultsStr.appendChild(letter), waitTime);
     waitTime += printInterval;
   }
+
+  const streakText = document.createElement("h3");
+  streakText.textContent = `Longest Streak: ${longestStreak}`;
+  streakText.style.color = "#333";
+  streakText.style.margin = "1vh auto";
+  streakText.style.width = "fit-content";
+  resultsDiv.appendChild(streakText);
+
+  const trialText = document.createElement("h3");
+  trialText.textContent = "Text:";
+  trialText.style.color = "#333";
+  trialText.style.margin = "1vh auto";
+  trialText.style.width = "fit-content";
+  resultsDiv.appendChild(trialText);
   
   resultsDiv.appendChild(resultsStr);
 

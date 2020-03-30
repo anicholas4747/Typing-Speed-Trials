@@ -36,22 +36,28 @@ class Key {
     this.y += this.speed;
 
     // if key correctly hit
-    const hitZone = Math.abs(this.y - window.gameData.canvasHeight * 0.85) < 20;
+    const hitZone = Math.abs(this.y - window.gameData.canvasHeight * 0.85) < 22;
     const pressingRightKey = (this.char === " ") ? window.gameData.pressedKeys.space : window.gameData.pressedKeys[this.char];
     if (!this.hit && hitZone && pressingRightKey) {
       this.hit = true;
       window.gameData.streak += 1;
-      window.gameData.longestStreak = Math.max(window.gameData.longestStreak, window.gameData.streak);
       window.gameData.typedString += this.char;
+      console.log("hit", this.char)
     }
 
     // if key missed
-    const missedZone = (this.y - window.gameData.canvasHeight * 0.85) > 10;
+    const missedZone = (this.y - window.gameData.canvasHeight * 0.85) > 22;
     if (!this.missed && !this.hit && missedZone) {
       this.missed = true;
       window.gameData.streak = 0;
       window.gameData.health -= 1;
       window.gameData.typedString += "*";
+      console.log("missed", this.char)
+    }
+
+    // character made it to goal zone
+    if (Math.floor(this.y - window.gameData.canvasHeight * 0.85) === 22) {
+      window.gameData.traveledString += this.char;
     }
 
     this.draw();

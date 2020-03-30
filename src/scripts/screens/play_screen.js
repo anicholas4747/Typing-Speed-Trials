@@ -33,9 +33,9 @@ export const renderPlayScreen = (mode) => {
     health: 25,
     healthRecovering: false,
     streak: 0,
-    longestStreak: 0,
     wpm: (mode === "endless") ? 20 : mode,
     typedString: "",
+    traveledString: "",
     attemptedString: "",
     soundFX: window.soundChoice,
     canvasWidth: canvas.width,
@@ -122,6 +122,7 @@ export const renderPlayScreen = (mode) => {
 
   // animation function
   function animate() {
+    console.log(window.gameData.typedString)
     if (window.gameData.health === 0 || window.gameData.quit || Date.now() >= window.gameData.finishTime) {
       clearInterval(increaseWPMInterval);
       increaseWPMInterval = 0;
