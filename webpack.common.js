@@ -15,6 +15,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(png|svg|jpg|gif|mp3)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            publicPath: "./"
+          }
+        }],
+      },
+      {
         test: /\.js$/, // if we were using React.js, we would use \.jsx?$/
         use: {
           loader: "babel-loader",

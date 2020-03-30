@@ -13,6 +13,7 @@ import { wpm55Text } from "../game_logic/text_samples/55wpm";
 import { wpm60Text } from "../game_logic/text_samples/60wpm";
 import Key from "../game_logic/canvas_pieces/key";
 import ScrollKey from "../game_logic/canvas_pieces/scroll_key";
+import { playSound } from "../game_logic/sounds/play_sound";
 
 export const renderPlayScreen = (mode) => {
   const screen = document.getElementById("screen");
@@ -37,7 +38,7 @@ export const renderPlayScreen = (mode) => {
     typedString: "",
     traveledString: "",
     attemptedString: "",
-    soundFX: window.soundChoice,
+    soundFX: window.soundChoice.str,
     canvasWidth: canvas.width,
     canvasHeight: canvas.height,
     pressedKeys: { "a": false, "b": false, "c": false, "d": false, "e": false, "f": false, "g": false, "h": false, "i": false, "j": false, "k": false, "l": false, "m": false, "n": false, "o": false, "p": false, "q": false, "r": false, "s": false, "t": false, "u": false, "v": false, "w": false, "x": false, "y": false, "z": false, ",": false, ".": false, "space": false },
@@ -70,10 +71,6 @@ export const renderPlayScreen = (mode) => {
     window.gameData.wpm += 2;
   };
   if (mode === "endless") {
-    // interval does not clear if you do it this way
-    // setTimeout(() => {
-    //   increaseWPMInterval = setInterval(increaseWPM, (10 * 1000));
-    // }, (4 * 1000));
     increaseWPMInterval = setInterval(increaseWPM, (10 * 1000));
   }
 
@@ -116,6 +113,8 @@ export const renderPlayScreen = (mode) => {
   while (wordsArr.length) {
     let currentChar = wordsArr.shift();
     setTimeout(() => canvasElements.push(new Key(currentChar)), waitTime);
+    if (window.gameData.soundFX !== "no-sound") setTimeout(playSound, waitTime);
+    // if (window.gameData.soundFX !== "no-sound") playSound(waitTime);
     setTimeout(() => canvasElements.push(new ScrollKey(currentChar)), waitTime);
     waitTime += printInterval;
   }
