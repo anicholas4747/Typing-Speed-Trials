@@ -16,7 +16,7 @@ class ScrollKey {
     this.x -= this.speed;
 
     // if key correctly hit
-    const hitZone = Math.abs(this.x - window.gameData.canvasWidth * 0.25) < 15;
+    const hitZone = Math.abs(this.x - window.gameData.canvasWidth * 0.25) < 25;
     const pressingRightKey = (this.char === " ") ? window.gameData.pressedKeys.space : window.gameData.pressedKeys[this.char];
     if (!this.hit && hitZone && pressingRightKey) {
       this.hit = true;

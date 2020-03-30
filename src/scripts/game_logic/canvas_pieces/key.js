@@ -36,7 +36,7 @@ class Key {
     this.y += this.speed;
 
     // if key correctly hit
-    const hitZone = Math.abs(this.y - window.gameData.canvasHeight * 0.85) < 25;
+    const hitZone = Math.abs(this.y - window.gameData.canvasHeight * 0.85) < 20;
     const pressingRightKey = (this.char === " ") ? window.gameData.pressedKeys.space : window.gameData.pressedKeys[this.char];
     if (!this.hit && hitZone && pressingRightKey) {
       this.hit = true;

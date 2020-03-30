@@ -70,10 +70,11 @@ export const renderPlayScreen = (mode) => {
     window.gameData.wpm += 2;
   };
   if (mode === "endless") {
-    console.log("setting interval")
-    setTimeout(() => {
-      increaseWPMInterval = setInterval(increaseWPM, (10 * 1000));
-    }, (4 * 1000));
+    // interval does not clear if you do it this way
+    // setTimeout(() => {
+    //   increaseWPMInterval = setInterval(increaseWPM, (10 * 1000));
+    // }, (4 * 1000));
+    increaseWPMInterval = setInterval(increaseWPM, (10 * 1000));
   }
 
   // bring canvas to life
