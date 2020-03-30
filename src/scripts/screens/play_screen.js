@@ -2,6 +2,13 @@ import { renderResultsScreen } from "./results_screen";
 import { changeGameEventListeners } from "../util/events";
 import { populateGoals } from "../game_logic/canvas_pieces/goals";
 import Key from "../game_logic/canvas_pieces/key";
+import { endlessText } from "../game_logic/text_samples/endless";
+import { wpm40Text } from "../game_logic/text_samples/40wpm";
+import { wpm30Text } from "../game_logic/text_samples/30wpm";
+import { wpm50Text } from "../game_logic/text_samples/50wpm";
+import { wpm25Text } from "../game_logic/text_samples/25wpm";
+import { wpm45Text } from "../game_logic/text_samples/45wpm";
+import { wpm35Text } from "../game_logic/text_samples/35wpm";
 
 export const renderPlayScreen = (mode) => {
   const screen = document.getElementById("screen");
@@ -62,9 +69,30 @@ export const renderPlayScreen = (mode) => {
   animate();
 
   // set up sample text to be read
-  const words = "hello world";
-  let wordsArr = words.split("");
+  let words;
+  if (mode === "endless") {
+    words = endlessText[Math.floor(Math.random() * array.length)];
+  } else if (mode === 20) {
+    words = [Math.floor(Math.random() * array.length)];
+  } else if (mode === 25) {
+    words = wpm25Text[Math.floor(Math.random() * array.length)];
+  } else if (mode === 30) {
+    words = wpm30Text[Math.floor(Math.random() * array.length)];
+  } else if (mode === 35) {
+    words = wpm35Text[Math.floor(Math.random() * array.length)];
+  } else if (mode === 40) {
+    words = wpm40Text[Math.floor(Math.random() * array.length)];
+  } else if (mode === 45) {
+    words = wpm45Text[Math.floor(Math.random() * array.length)];
+  } else if (mode === 50) {
+    words = wpm50Text[Math.floor(Math.random() * array.length)];
+  } else if (mode === 55) {
+    words = [Math.floor(Math.random() * array.length)];
+  } else if (mode === 60) {
+    words = [Math.floor(Math.random() * array.length)];
+  }
 
+  let wordsArr = words.split("");
   // for endless mode, loop text again
   if (mode === "endless") wordsArr = wordsArr.concat(wordsArr);
 
@@ -77,7 +105,7 @@ export const renderPlayScreen = (mode) => {
     setTimeout(() => canvasElements.push(new Key(currentChar)), waitTime);
     waitTime += printInterval;
   }
-  console.log("exited while loop")
+  console.log("exited while loop");
 
   // animation function
   function animate() {
