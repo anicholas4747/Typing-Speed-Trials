@@ -48,7 +48,7 @@ class Goal {
     
     // Streak
     window.ctx.font = "40px Arial";
-    window.ctx.fillText(`Streak: ${streak}`, (canvasWidth / 2.225) - 30, 150);
+    window.ctx.fillText(`Streak: ${streak}`, canvasWidth * 0.84, canvasHeight * 0.2);
     
     // Goal
     let fillColor;
@@ -91,6 +91,12 @@ class Goal {
     window.ctx.beginPath();
     window.ctx.moveTo(this.x + (goalWidth / 2), canvasHeight * 0.3);
     window.ctx.lineTo(this.x + (goalWidth / 2), this.y);
+    window.ctx.stroke();
+
+    // Scroll Track
+    window.ctx.beginPath();
+    window.ctx.moveTo(canvasWidth * 0.275, canvasHeight * 0.15);
+    window.ctx.lineTo(canvasWidth * 0.275, canvasHeight * 0.25);
     window.ctx.stroke();
   }
 }

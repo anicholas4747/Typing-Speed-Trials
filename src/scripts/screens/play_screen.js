@@ -50,18 +50,34 @@ export const renderPlayScreen = (mode) => {
   const canvasElements = [];
   canvasElements.push(...populateGoals());
 
-  // const word = "helloworld";
-  const word = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-  // 1000MS/SEC / ((WPM * 5 CHARS/WORD) / 60SEC)
-  const printInterval = 1000 / ((window.gameData.wpm * 5) / 60);
-  let waitTime = printInterval;
-  for (let i in word) {
-    setTimeout(() => canvasElements.push(new Key(word[i])), waitTime);
-    waitTime += printInterval;
+
+  // for endless mode, increase WPM + 2 every 3 sec
+  if (mode === "endless") {
+    setInterval(() => {
+      window.gameData.wpm += 2;
+    }, 500);
   }
 
   // bring canvas to life
   animate();
+
+  // set up sample text to be read
+  const words = "hello world";
+  let wordsArr = words.split("");
+
+  // for endless mode, loop text again
+  if (mode === "endless") wordsArr = wordsArr.concat(wordsArr);
+
+  // 1000MS/SEC / ((WPM * 5 CHARS/WORD) / 60SEC)
+  const printInterval = 1000 / ((window.gameData.wpm * 5) / 60);
+  let waitTime = printInterval + (4 * 1000);
+
+  while (wordsArr.length) {
+    let currentChar = wordsArr.shift();
+    setTimeout(() => canvasElements.push(new Key(currentChar)), waitTime);
+    waitTime += printInterval;
+  }
+  console.log("exited while loop")
 
   // animation function
   function animate() {
