@@ -37,12 +37,12 @@ class Goal {
     
     // Health
     window.ctx.fillStyle = "#111";
-    window.ctx.fillRect(canvasWidth * 0.77, canvasHeight * 0.065, 200, 50);
+    window.ctx.fillRect(canvasWidth * 0.725, canvasHeight * 0.065, 250, 50);
     window.ctx.fill();
     window.ctx.fillStyle = "#0F0";
-    window.ctx.fillRect(canvasWidth * 0.77, canvasHeight * 0.065, health * 10, 50);
+    window.ctx.fillRect(canvasWidth * 0.725, canvasHeight * 0.065, health * 10, 50);
     window.ctx.fill();
-    window.ctx.strokeRect(canvasWidth * 0.77, canvasHeight * 0.065, 200, 50);
+    window.ctx.strokeRect(canvasWidth * 0.725, canvasHeight * 0.065, 250, 50);
     window.ctx.fillStyle = "#FFF";
     window.ctx.fillText(`${health}`, canvasWidth * 0.925, canvasHeight * 0.125);
     

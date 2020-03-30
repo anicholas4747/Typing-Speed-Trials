@@ -36,11 +36,12 @@ class Key {
     this.y += this.speed;
 
     // if key correctly hit
-    const hitZone = Math.abs(this.y - window.gameData.canvasHeight * 0.85) < 15;
+    const hitZone = Math.abs(this.y - window.gameData.canvasHeight * 0.85) < 25;
     const pressingRightKey = (this.char === " ") ? window.gameData.pressedKeys.space : window.gameData.pressedKeys[this.char];
     if (!this.hit && hitZone && pressingRightKey) {
       this.hit = true;
       window.gameData.streak += 1;
+      window.gameData.longestStreak = Math.max(window.gameData.longestStreak, window.gameData.streak);
       window.gameData.typedString += this.char;
     }
 

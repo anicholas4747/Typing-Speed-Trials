@@ -30,11 +30,13 @@ export const renderPlayScreen = (mode) => {
   // constants that game pieces listen for
   window.ctx = canvas.getContext("2d");
   window.gameData = {
-    health: 20,
+    health: 25,
     healthRecovering: false,
     streak: 0,
+    longestStreak: 0,
     wpm: (mode === "endless") ? 20 : mode,
     typedString: "",
+    attemptedString: "",
     soundFX: window.soundChoice,
     canvasWidth: canvas.width,
     canvasHeight: canvas.height,
@@ -63,10 +65,15 @@ export const renderPlayScreen = (mode) => {
 
 
   // for endless mode, increase WPM + 2 every 3 sec
+  let increaseWPMInterval;
+  function increaseWPM () {
+    window.gameData.wpm += 2;
+  };
   if (mode === "endless") {
-    setInterval(() => {
-      window.gameData.wpm += 2;
-    }, (10 * 1000));
+    console.log("setting interval")
+    setTimeout(() => {
+      increaseWPMInterval = setInterval(increaseWPM, (10 * 1000));
+    }, (4 * 1000));
   }
 
   // bring canvas to life
@@ -96,6 +103,7 @@ export const renderPlayScreen = (mode) => {
     words = wpm60Text[Math.floor(Math.random() * wpm60Text.length)];
   }
 
+  window.gameData.attemptedString = words;
   let wordsArr = words.split("");
   // for endless mode, loop text again
   if (mode === "endless") wordsArr = wordsArr.concat(wordsArr);
@@ -114,6 +122,8 @@ export const renderPlayScreen = (mode) => {
   // animation function
   function animate() {
     if (window.gameData.health === 0 || window.gameData.quit || Date.now() >= window.gameData.finishTime) {
+      clearInterval(increaseWPMInterval);
+      increaseWPMInterval = 0;
       cancelAnimationFrame(animate);
       if (!window.gameData.quit) {
         changeGameEventListeners("remove");

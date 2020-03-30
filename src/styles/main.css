@@ -276,7 +276,7 @@ canvas {
   height: 100%;
 }
 
-#quit-button {
+#quit-button, #return-home {
   cursor: pointer;
   display: inline-block;
   box-sizing: border-box;
@@ -291,6 +291,17 @@ canvas {
   box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.75);
 }
 
-#quit-button:hover {
+#quit-button:hover, #return-home:hover {
   background-color: rgba(153, 153, 153, 0.75);
+}
+
+#results-str {
+  display: block;
+  width: 75%;
+  height: 24vh;
+  margin: 0 auto;
+  padding: 0 0.75vw;
+  padding-bottom: 0.75vw;
+  border-radius: 5px;
+  border: 2px solid #333;
 }

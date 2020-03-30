@@ -16,14 +16,14 @@ class ScrollKey {
     this.x -= this.speed;
 
     // if key correctly hit
-    const hitZone = Math.abs(this.x - window.gameData.canvasWidth * 0.275) < 15;
+    const hitZone = Math.abs(this.x - window.gameData.canvasWidth * 0.25) < 15;
     const pressingRightKey = (this.char === " ") ? window.gameData.pressedKeys.space : window.gameData.pressedKeys[this.char];
     if (!this.hit && hitZone && pressingRightKey) {
       this.hit = true;
     }
 
     // if key missed
-    const missedZone = (this.x - window.gameData.canvasWidth * 0.275) < 15;
+    const missedZone = (this.x - window.gameData.canvasWidth * 0.235) < 15;
     if (!this.missed && !this.hit && missedZone) {
       this.missed = true;
     }
