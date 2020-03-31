@@ -121,6 +121,7 @@ export const renderPlayScreen = (mode) => {
   // play sound as metronome at wpm speed
   let gameMetronome;
   if (window.gameData.soundFX !== "no-sound") gameMetronome = setInterval(playSound, printInterval);
+  let startOfTenSecs = Date.now();
 
   // countdown
   countdown(printInterval);
@@ -140,6 +141,12 @@ export const renderPlayScreen = (mode) => {
         renderResultsScreen();
       }
     } else {
+      // if endless mode, increase metronome speed
+      if (mode === "endless" && (Date.now() - startOfTenSecs > 9950)){
+        clearInterval(gameMetronome);
+        gameMetronome = setInterval(playSound, 1000 / ((window.gameData.wpm * 5) / 60));
+        startOfTenSecs = Date.now();
+      }
       requestAnimationFrame(animate);
     }
     window.ctx.clearRect(0, 0, innerWidth, innerHeight);
