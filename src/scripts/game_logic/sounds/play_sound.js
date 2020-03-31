@@ -1,13 +1,11 @@
 
-export const playSound = (delay) => {
+export const playSound = () => {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const audioContext = new AudioContext();
 
-  playSound(delay);
-  console.log(delay)
-  function playSound(delay) {
-    delay = delay / 1000;
+  playSound();
 
+  function playSound() {
     const source = audioContext.createBufferSource();
     source.buffer = window.soundChoice.buffer;
 
@@ -16,6 +14,6 @@ export const playSound = (delay) => {
 
     source.connect(gainNode).connect(audioContext.destination);
 
-    source.start(delay);
+    source.start(0);
   }
 };

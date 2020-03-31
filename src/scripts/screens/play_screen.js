@@ -14,6 +14,7 @@ import { wpm60Text } from "../game_logic/text_samples/60wpm";
 import Key from "../game_logic/canvas_pieces/key";
 import ScrollKey from "../game_logic/canvas_pieces/scroll_key";
 import { playSound } from "../game_logic/sounds/play_sound";
+import { countdown } from "../util/countdown";
 
 export const renderPlayScreen = (mode) => {
   const screen = document.getElementById("screen");
@@ -113,17 +114,26 @@ export const renderPlayScreen = (mode) => {
   while (wordsArr.length) {
     let currentChar = wordsArr.shift();
     setTimeout(() => canvasElements.push(new Key(currentChar)), waitTime);
-    if (window.gameData.soundFX !== "no-sound") setTimeout(playSound, waitTime);
-    // if (window.gameData.soundFX !== "no-sound") playSound(waitTime);
     setTimeout(() => canvasElements.push(new ScrollKey(currentChar)), waitTime);
     waitTime += printInterval;
   }
 
+  // play sound as metronome at wpm speed
+  let gameMetronome;
+  if (window.gameData.soundFX !== "no-sound") gameMetronome = setInterval(playSound, printInterval);
+
+  // countdown
+  countdown(printInterval);
+
   // animation function
   function animate() {
     if (window.gameData.health === 0 || window.gameData.quit || Date.now() >= window.gameData.finishTime) {
+      // clear intervals when game ended
       clearInterval(increaseWPMInterval);
       increaseWPMInterval = 0;
+      clearInterval(gameMetronome);
+      gameMetronome = 0;
+
       cancelAnimationFrame(animate);
       if (!window.gameData.quit) {
         changeGameEventListeners("remove");
