@@ -10,4 +10,8 @@
 - A 10-character streak awards +1 health
 - Game Over if your health hits 0
 
+## Main Screen
 ![MAIN](/src/media/images/main_screen.png?raw=true "MAIN")
+
+## Gameplay
+![MAIN](/src/media/images/typing_gameplay.gif?raw=true "MAIN")
